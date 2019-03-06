@@ -9,10 +9,10 @@ import tempfile
 
 class ImageLabeller(object):
 
-    def __init__(self, csvfile, user=None):
-        self.fieldnames = ["auction_id", "image_key", "url", "brand"]
+    def __init__(self, csvfile, owner=None):
+        self.fieldnames = ["auction_id", "image_key", "url", "brand", "owner"]
         self.tirePhotosCsvFile = csvfile
-        self.user = user
+        self.owner = owner
 
     def fetchUniqueIds(self, csvfile):
         auctionId = set()
@@ -52,12 +52,19 @@ class ImageLabeller(object):
                     reader = csv.DictReader(fp, delimiter=",")
                     writer = csv.DictWriter(tempFp, fieldnames=self.fieldnames)
                     writer.writeheader()
+                    auctionId = None
+                    prevBrand = None
                     for row in reader:
-                        if not quit or not row["brand"]:
+                        if not quit or not row["brand"] or self.owner == row["owner"]:
                             img = self.download(row["url"], True)
                             if img is None:
                                 break
-                            brand = input("Enter brand name for {}: ".format(row["auction_id"]))
+                            if auctionId != row["auction_id"]:
+                                brand = input("Enter brand name for {}: ".format(row["auction_id"]))
+                                auctionId = row["auction_id"]
+                                prevBrand = brand
+                            else:
+                                brand = prevBrand
                             if brand.strip() == "quit" or brand.strip() == "q":
                                 quit = True
                             else:
@@ -65,37 +72,41 @@ class ImageLabeller(object):
                         writer.writerow(row)
             finally:
                 shutil.move(tempFp.name, self.tirePhotosCsvFile)
+                tempFp.close()
 
     def showLabel(self):
         if os.path.isfile(self.tirePhotosCsvFile):
             with open(self.tirePhotosCsvFile, "r") as fp:
                 reader = csv.DictReader(fp, delimiter=",")
                 for row in reader:
-                    img = self.download(row["url"], False)
-                    if img is None:
-                        break
-                    brand = row["brand"] if row["brand"] else "Not labelled"
-                    (width, height) = cv2.getTextSize(brand, cv2.FONT_HERSHEY_SIMPLEX,
-                                                      fontScale=1, thickness=2)[0]
-                    cv2.rectangle(img, (50, 50), (50 + width, 50 - height),
-                                  (0, 255, 255), cv2.FILLED)
-                    cv2.putText(img, brand, (50, 50), cv2.FONT_HERSHEY_SIMPLEX,
-                                fontScale=1, color=(0, 0, 255), thickness=2)
-                    cv2.imshow("test", img)
-                    cv2.waitKey(0)
-                    cv2.destroyWindow("test")
+                    if self.owner == row["owner"]:
+                        img = self.download(row["url"], False)
+                        if img is None:
+                            break
+                        brand = row["brand"] if row["brand"] else "Not labelled"
+                        (width, height) = cv2.getTextSize(brand, cv2.FONT_HERSHEY_SIMPLEX,
+                                                          fontScale=1, thickness=2)[0]
+                        cv2.rectangle(img, (50, 50), (50 + width, 50 - height),
+                                      (0, 255, 255), cv2.FILLED)
+                        cv2.putText(img, brand, (50, 50), cv2.FONT_HERSHEY_SIMPLEX,
+                                    fontScale=1, color=(0, 0, 255), thickness=2)
+                        cv2.imshow("test", img)
+                        cv2.waitKey(0)
+                        cv2.destroyWindow("test")
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--name", choices=["akshay", "adityan", "roshini"], required=True)
+    parser.add_argument("--owner", choices=["akshay", "adityan", "roshini"], required=True)
     parser.add_argument("--labelImages", action="store_true")
     parser.add_argument("--showLabels", action="store_true")
     args, _ = parser.parse_known_args()
     filename = "tire_photos.csv"
-    labelObj = ImageLabeller(filename, args.name)
+    labelObj = ImageLabeller(filename, args.owner)
     if args.labelImages:
         print('Starting image labelling...')
         labelObj.labelBrand()
     elif args.showLabels:
         labelObj.showLabel()
+    else:
+        raise AssertionError("No valid option selected. check --help.")
