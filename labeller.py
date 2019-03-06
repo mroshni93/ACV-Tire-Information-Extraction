@@ -29,7 +29,7 @@ class ImageLabeller(object):
         response = requests.get(url)
         name = url.split("/")[-1]
         if response.status_code == 200:
-            print("Downloading: {}".format(url))
+            # print("Downloading: {}".format(url))
             with open(name, "wb") as fp:
                 fp.write(response.content)
             img = cv2.imread(name)
@@ -52,24 +52,22 @@ class ImageLabeller(object):
                     reader = csv.DictReader(fp, delimiter=",")
                     writer = csv.DictWriter(tempFp, fieldnames=self.fieldnames)
                     writer.writeheader()
-                    auctionId = None
-                    prevBrand = None
                     for row in reader:
-                        if not quit or not row["brand"] or self.owner == row["owner"]:
-                            img = self.download(row["url"], True)
-                            if img is None:
-                                break
-                            if auctionId != row["auction_id"]:
+                        if self.owner == row["owner"]:
+                            if quit or row["brand"]:
+                                writer.writerow(row)
+                            else:
+                                img = self.download(row["url"], True)
+                                if img is None:
+                                    break
                                 brand = input("Enter brand name for {}: ".format(row["auction_id"]))
-                                auctionId = row["auction_id"]
-                                prevBrand = brand
-                            else:
-                                brand = prevBrand
-                            if brand.strip() == "quit" or brand.strip() == "q":
-                                quit = True
-                            else:
-                                row["brand"] = brand.strip()
-                        writer.writerow(row)
+                                if brand.strip() == "quit" or brand.strip() == "q":
+                                    quit = True
+                                else:
+                                    row["brand"] = brand.strip()
+                                writer.writerow(row)
+                        else:
+                            writer.writerow(row)
             finally:
                 shutil.move(tempFp.name, self.tirePhotosCsvFile)
                 tempFp.close()
@@ -90,9 +88,9 @@ class ImageLabeller(object):
                                       (0, 255, 255), cv2.FILLED)
                         cv2.putText(img, brand, (50, 50), cv2.FONT_HERSHEY_SIMPLEX,
                                     fontScale=1, color=(0, 0, 255), thickness=2)
-                        cv2.imshow("test", img)
+                        cv2.namedWindow("show", cv2.WINDOW_KEEPRATIO)
                         cv2.waitKey(0)
-                        cv2.destroyWindow("test")
+                        cv2.destroyWindow("show")
 
 
 if __name__ == "__main__":
