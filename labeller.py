@@ -64,7 +64,7 @@ class ImageLabeller(object):
                                 if brand.strip() == "quit" or brand.strip() == "q":
                                     quit = True
                                 else:
-                                    row["brand"] = brand.strip()
+                                    row["brand"] = brand.strip() if brand else "NV"
                                 writer.writerow(row)
                         else:
                             writer.writerow(row)
