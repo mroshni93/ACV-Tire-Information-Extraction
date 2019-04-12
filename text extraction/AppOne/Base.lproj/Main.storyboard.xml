@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="AppOne" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lZE-RG-KfO">
+                                <rect key="frame" x="0.0" y="20" width="375" height="246"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MaJ-1N-3Dr">
+                                <rect key="frame" x="99" y="430" width="176" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Upload &amp; Extract text"/>
+                                <connections>
+                                    <action selector="uploadButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="afc-E6-G9L"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dTY-Lv-e3I">
+                                <rect key="frame" x="7" y="332" width="168" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="168" id="6nZ-he-dvR"/>
+                                </constraints>
+                                <state key="normal" title="Take photo">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="takePhoto:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MOk-M7-7OH"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LrK-zP-3jY">
+                                <rect key="frame" x="198" y="331" width="169" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Select photo">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="selectPhoto:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Fit-pc-GtB"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="tire brand name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qiz-5d-jtx">
+                                <rect key="frame" x="99" y="490" width="176" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7X4-Gx-Bs9">
+                                <rect key="frame" x="48" y="269" width="279" height="20"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Double tap on image for bounding box">
+                                        <attributes>
+                                            <font key="NSFont" size="17" name="Baskerville"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Jog-e5-qOb">
+                                <rect key="frame" x="177" y="311" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="85t-Jb-cfu">
+                                <rect key="frame" x="99" y="590" width="176" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Submit">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="submitButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fNx-ei-UUF"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="qiz-5d-jtx" firstAttribute="leading" secondItem="85t-Jb-cfu" secondAttribute="leading" id="97h-A4-O6X"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="85t-Jb-cfu" secondAttribute="bottom" constant="47" id="9a9-vh-SIG"/>
+                            <constraint firstItem="LrK-zP-3jY" firstAttribute="leading" secondItem="dTY-Lv-e3I" secondAttribute="trailing" constant="23" id="9jW-ld-4uO"/>
+                            <constraint firstItem="qiz-5d-jtx" firstAttribute="top" secondItem="MaJ-1N-3Dr" secondAttribute="bottom" constant="30" id="CRG-Vb-rwV"/>
+                            <constraint firstItem="7X4-Gx-Bs9" firstAttribute="top" secondItem="lZE-RG-KfO" secondAttribute="bottom" constant="3" id="FDM-bU-EQQ"/>
+                            <constraint firstItem="dTY-Lv-e3I" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="7" id="IFt-o7-fuS"/>
+                            <constraint firstItem="MaJ-1N-3Dr" firstAttribute="leading" secondItem="qiz-5d-jtx" secondAttribute="leading" id="J0s-Y5-WpX"/>
+                            <constraint firstItem="Jog-e5-qOb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="177" id="LKo-Kr-0pz"/>
+                            <constraint firstItem="Jog-e5-qOb" firstAttribute="top" secondItem="7X4-Gx-Bs9" secondAttribute="bottom" constant="22" id="Npv-IH-K1H"/>
+                            <constraint firstAttribute="trailing" secondItem="lZE-RG-KfO" secondAttribute="trailing" id="OX5-hk-fxi"/>
+                            <constraint firstItem="qiz-5d-jtx" firstAttribute="trailing" secondItem="85t-Jb-cfu" secondAttribute="trailing" id="PzU-ZV-4fd"/>
+                            <constraint firstItem="LrK-zP-3jY" firstAttribute="top" secondItem="7X4-Gx-Bs9" secondAttribute="bottom" constant="42" id="TGL-w8-uX9"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="LrK-zP-3jY" secondAttribute="trailing" constant="8" id="UYf-Bl-LYN"/>
+                            <constraint firstItem="dTY-Lv-e3I" firstAttribute="top" secondItem="7X4-Gx-Bs9" secondAttribute="bottom" constant="43" id="V4t-Ih-hke"/>
+                            <constraint firstItem="MaJ-1N-3Dr" firstAttribute="trailing" secondItem="qiz-5d-jtx" secondAttribute="trailing" id="Xfa-Kz-WuS"/>
+                            <constraint firstItem="MaJ-1N-3Dr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="99" id="ZtP-km-3gh"/>
+                            <constraint firstItem="lZE-RG-KfO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="aVE-OK-qhA"/>
+                            <constraint firstItem="MaJ-1N-3Dr" firstAttribute="top" secondItem="dTY-Lv-e3I" secondAttribute="bottom" constant="68" id="b9n-TW-LrG"/>
+                            <constraint firstItem="lZE-RG-KfO" firstAttribute="centerX" secondItem="7X4-Gx-Bs9" secondAttribute="centerX" id="cLe-hb-2jY"/>
+                            <constraint firstItem="85t-Jb-cfu" firstAttribute="top" secondItem="qiz-5d-jtx" secondAttribute="bottom" constant="70" id="fOh-1I-ORj"/>
+                            <constraint firstItem="7X4-Gx-Bs9" firstAttribute="centerX" secondItem="Jog-e5-qOb" secondAttribute="centerX" id="hte-bl-61d"/>
+                            <constraint firstItem="Jog-e5-qOb" firstAttribute="centerX" secondItem="MaJ-1N-3Dr" secondAttribute="centerX" id="pF0-wR-DIa"/>
+                            <constraint firstItem="7X4-Gx-Bs9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="48" id="sQF-bx-owO"/>
+                            <constraint firstItem="lZE-RG-KfO" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="vsE-G0-Rk8"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="myActivityIndicator" destination="Jog-e5-qOb" id="vvj-bP-k4e"/>
+                        <outlet property="myImage" destination="lZE-RG-KfO" id="2gF-ar-oBi"/>
+                        <outlet property="myTextDisplay" destination="qiz-5d-jtx" id="axw-tA-7P8"/>
+                        <outlet property="selectPhoto" destination="LrK-zP-3jY" id="nZ8-8B-73t"/>
+                        <outlet property="submitButton" destination="85t-Jb-cfu" id="X7U-vJ-SDf"/>
+                        <outlet property="takePhotoButton" destination="dTY-Lv-e3I" id="hX7-sR-VvV"/>
+                        <outlet property="uploadButton" destination="MaJ-1N-3Dr" id="fye-KM-K0C"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="53.600000000000001" y="27.436281859070466"/>
+        </scene>
+    </scenes>
+</document>
